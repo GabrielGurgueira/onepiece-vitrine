@@ -19,6 +19,8 @@ export interface Listing {
   card_code: string | null
   reference_image: string | null
   set_name: string | null
+  rarity: string | null
+  color: string | null
   condition: CardCondition | null
   price: number | null
   quantity: number

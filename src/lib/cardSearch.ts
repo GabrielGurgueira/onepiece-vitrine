@@ -5,6 +5,7 @@ export interface CardSuggestion {
   image: string | null
   set_name: string | null
   rarity: string | null
+  color: string | null
 }
 
 const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/card-search`

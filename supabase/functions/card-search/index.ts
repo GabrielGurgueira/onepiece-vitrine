@@ -37,6 +37,7 @@ function rowToResult(row: any) {
     image: row.image,
     set_name: row.set_name,
     rarity: row.rarity,
+    color: row.color,
   };
 }
 
@@ -48,6 +49,7 @@ function itemToResult(item: any) {
     image: item.images?.[0]?.medium || item.images?.[0]?.small || item.images?.[0]?.large || null,
     set_name: item.set?.name ?? null,
     rarity: item.attributes?.Rarity ?? null,
+    color: item.attributes?.Color ?? null,
   };
 }
 
@@ -135,6 +137,7 @@ Deno.serve(async (req) => {
         image: item.images?.[0]?.medium || item.images?.[0]?.small || item.images?.[0]?.large || null,
         set_name: item.set?.name ?? null,
         rarity: item.attributes?.Rarity ?? null,
+        color: item.attributes?.Color ?? null,
         cached_at: new Date().toISOString(),
       }));
       await supabase.from("card_cache").upsert(rows, { onConflict: "api_id" });
