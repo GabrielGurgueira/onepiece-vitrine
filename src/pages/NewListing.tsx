@@ -77,6 +77,7 @@ export default function NewListing() {
         card_code: selectedCard?.code ?? null,
         reference_image: selectedCard?.image ?? null,
         set_name: setName.trim() || null,
+        set_release_date: selectedCard?.set_release_date ?? null,
         rarity: selectedCard?.rarity ?? null,
         color: selectedCard?.color ?? null,
         condition: adType === 'venda' ? condition : null,

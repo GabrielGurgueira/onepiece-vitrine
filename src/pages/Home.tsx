@@ -51,10 +51,26 @@ export default function Home() {
     }
   }, [])
 
-  const availableSets = useMemo(
-    () => Array.from(new Set(listings.map((l) => l.set_name).filter((v): v is string => Boolean(v)))).sort(),
-    [listings],
-  )
+  const availableSets = useMemo(() => {
+    const map = new Map<string, { name: string; code: string | null; releaseDate: string | null }>()
+    for (const l of listings) {
+      if (!l.set_name) continue
+      const code = l.card_code?.split('-')[0]?.toUpperCase() || null
+      const existing = map.get(l.set_name)
+      if (!existing) {
+        map.set(l.set_name, { name: l.set_name, code, releaseDate: l.set_release_date })
+      } else {
+        if (!existing.code && code) existing.code = code
+        if (!existing.releaseDate && l.set_release_date) existing.releaseDate = l.set_release_date
+      }
+    }
+    return Array.from(map.values()).sort((a, b) => {
+      if (a.releaseDate && b.releaseDate) return b.releaseDate.localeCompare(a.releaseDate)
+      if (a.releaseDate) return -1
+      if (b.releaseDate) return 1
+      return a.name.localeCompare(b.name)
+    })
+  }, [listings])
   const availableColors = useMemo(
     () => Array.from(new Set(listings.map((l) => l.color).filter((v): v is string => Boolean(v)))).sort(),
     [listings],
@@ -140,8 +156,8 @@ export default function Home() {
             >
               <option value="todos">Set</option>
               {availableSets.map((s) => (
-                <option key={s} value={s}>
-                  {s}
+                <option key={s.name} value={s.name}>
+                  {s.code ? `${s.code} - ${s.name}` : s.name}
                 </option>
               ))}
             </select>

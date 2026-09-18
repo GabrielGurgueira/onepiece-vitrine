@@ -36,6 +36,7 @@ function rowToResult(row: any) {
     code: row.code,
     image: row.image,
     set_name: row.set_name,
+    set_release_date: row.set_release_date,
     rarity: row.rarity,
     color: row.color,
   };
@@ -48,6 +49,7 @@ function itemToResult(item: any) {
     code: item.code,
     image: item.images?.[0]?.medium || item.images?.[0]?.small || item.images?.[0]?.large || null,
     set_name: item.set?.name ?? null,
+    set_release_date: item.set?.release_date ?? null,
     rarity: item.attributes?.Rarity ?? null,
     color: item.attributes?.Color ?? null,
   };
@@ -136,6 +138,7 @@ Deno.serve(async (req) => {
         code: item.code ?? null,
         image: item.images?.[0]?.medium || item.images?.[0]?.small || item.images?.[0]?.large || null,
         set_name: item.set?.name ?? null,
+        set_release_date: item.set?.release_date ?? null,
         rarity: item.attributes?.Rarity ?? null,
         color: item.attributes?.Color ?? null,
         cached_at: new Date().toISOString(),

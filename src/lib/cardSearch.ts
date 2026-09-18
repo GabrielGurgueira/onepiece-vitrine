@@ -4,6 +4,7 @@ export interface CardSuggestion {
   code: string
   image: string | null
   set_name: string | null
+  set_release_date: string | null
   rarity: string | null
   color: string | null
 }

@@ -34,6 +34,7 @@ create table if not exists public.listings (
   card_code text,
   reference_image text,
   set_name text,
+  set_release_date date,
   rarity text,
   color text,
   condition text check (condition in ('NM', 'SP', 'MP', 'D')),
@@ -103,6 +104,7 @@ create table if not exists public.card_cache (
   code text,
   image text,
   set_name text,
+  set_release_date date,
   rarity text,
   color text,
   cached_at timestamptz not null default now()
